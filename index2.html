@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>黄花机场演示屏</title>
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/vue.1.0.17.min.js"></script>
+	<!-- <script src="js/underscore1.8.3.min.js"></script> -->
+	<script src="js/layer.js"></script>
+	<script src="js/jquery.SuperSlide.2.1.1.js"></script>
+	<script src="js/clock.js"></script>
+	<script src="js/TweenMax.min.js"></script>
+	<script src="js/d3.v3.min.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="reset.css"/>
+	<link rel="stylesheet" type="text/css" href="common.css"/>
+</head>
+<body>
+	<div class="layout clearfix" v-bind:class="{ 'layout_home': nav_id==3,'layout_right_wide': (nav_id==1&art_id==2) }">
+		<div class="layout_side">
+			<div class="logo" v-on:click="goto(3,0)"><img src="images/logo.png"></div>
+			<div class="clock">
+				<div id="Date"></div>
+				<ul>
+					<li id="hours"> </li>
+				    <li id="point">:</li>
+				    <li id="min"> </li>
+				    <li id="point">:</li>
+				    <li id="sec"> </li>
+				</ul>
+			</div>
+		
+			<div class="sub_cont bg1">
+				<div class="contA">
+					<div class="sub_tit">
+						<h1>{{nav[nav_id].tit}}</h1>
+						<h2>{{nav[nav_id].tit_en}}</h2>
+					</div>
+					
+					<ul class="sub">
+						<li v-for="el in art[nav_id].sub" v-on:click="goto(nav_id,$index)"
+						v-bind:class="{ 'on': $index==art_id }"
+						> {{el.sub_tit}}</li>
+					</ul>
+				</div>
+
+				<div class="contB">
+					<img src="images/ll1.jpg">
+				</div>
+			</div>
+		
+			<div class="pop_pic bg1"><img src="images/smallsst.jpg"></div>
+		
+		
+		</div>
+		
+		<div class="layout_main">
+			<ul class="nav">
+				<li
+				 v-for="el in nav| limitBy 3" 
+				 v-on:click="goto($index,0)"
+				 v-bind:class="{ 'on': $index==nav_id }">
+				  {{el.tit}} / {{el.tit_en}} </li>
+			</ul>
+			<div class="home" v-on:click="goto(3,0)"><img src="images/index.jpg"></div>
+		
+			<div class="content">
+				<div class="bread">当前位置：机场数字化服务系统 - {{nav[nav_id].tit}} - {{art[nav_id].sub[art_id].sub_tit}}</div>
+				<div class="box">
+					<section> </section>
+				</div>
+				
+			</div>
+
+			<div class="slide_right">
+				<div class="bd"> 
+					<ul>
+					<li><img src="images/r1.jpg"></li>
+					<li><img src="images/r2.jpg"></li>
+					<li><img src="images/r3.jpg"></li>
+					</ul>
+				</div>
+				<div class="hd"> <ul> <li>1</li> <li>2</li> <li>3</li> </ul> </div>
+			</div>
+		</div>
+	</div>
+
+	<footer>
+		<div class="txtScroll-top">
+			<div class="bd">
+				<ul>
+					<li>操作提示：本屏中间区域，如出现滚动条，可直接用手指拖动内容区</li>
+					<li>欢迎使用湖南机场数据化服务平台</li>
+					<li>Welcome to use digital hunan airport service platform</li>
+				</ul>
+			</div>
+		</div>
+	</footer>
+</body>
+</html>
+
+<script>
+
+jQuery(".slide_right").slide({mainCell:".bd ul",autoPlay:false,effect:"leftLoop",interTime:3000,delayTime:1000});
+jQuery(".txtScroll-top").slide({mainCell:".bd ul",effect:"top",autoPlay:false,interTime:2000});
+
+$('.pop_pic img').click(function(event) {
+	layer.open({
+	    type: 1,
+	    title: false,
+	    closeBtn: 2,
+	    area : ['95%','90%'],
+	    scrollbar: false,
+	    shadeClose: true,
+	    shade: [0.9, '#000000'],
+	    maxWidth:400,
+	    content : '<div class="slideBox"> <div class="bd"> <ul> <li><img src="images/yj1.jpg"></li> <li><img src="images/yj2.jpg"></li> <li><img src="images/yj3.jpg"></li> </ul> </div> <div class="hd"> <ul> <li>1</li> <li>2</li> <li>3</li> </ul> </div><a class="prev" href="javascript:void(0)"><img src="images/prev.png"></a> <a class="next" href="javascript:void(0)"><img src="images/next.png"></a> </div>',
+	    success: function(layero, index){
+	        jQuery(".slideBox").slide({mainCell:".bd ul",autoPlay:false});
+	      }
+	});
+});
+
+$("section").on("click", ".open", function(event){
+    var html_pop = $( "."+$(this).data("pop") ).html(); 
+    layer.open({
+        type: 1,
+          title: false,
+          closeBtn: 2,
+          shadeClose: true,
+          skin: 'my_pop',
+          area: ['70%', '50%'],
+          content: html_pop
+    });     
+});
+
+
+var vm;
+function init(data) {
+	vm = new Vue({
+	    el: 'body', 
+	    data: data,
+	    ready:function() {
+	    	show_content(this.art,this.nav_id,this.art_id);
+	    },
+	    methods: {
+	        goto: function (a,b) {
+	        	console.log("第"+a+"章，第"+b+"节");
+	        	this.nav_id = a;
+	        	this.art_id = b;
+	        	show_content(this.art,a,b);
+	        }
+	      }
+	});  
+}
+
+function show_content(art,a,b) {
+	url_current = art[a].sub[b].url;
+	$("section").load(url_current);
+}
+
+
+/*$.ajax({
+	url: 'main.json'
+})
+.done(function(data) {
+	init(data);
+})
+.fail(function() {
+	console.log("error");
+})
+;*/
+	
+var data=
+{
+    "nav_id": 0, 
+    "art_id": 0, 
+    "nav": [
+    	{"tit": "机场流程", "tit_en": "Process"},
+    	{"tit": "旅客服务", "tit_en": "Service"},
+    	{"tit": "机场商业", "tit_en": "Business"},
+    	{"tit": "首页", "tit_en": "home"}
+    ], 
+    "art": [
+	    {
+	        "sub": [
+	        	{"sub_tit":"国内出发","url":"a0.html"},
+	        	{"sub_tit":"国内到达","url":"a1.html"},
+	        	{"sub_tit":"国内中转","url":"a2.html"}
+	        ]
+	    },
+
+	    {
+	        "sub": [
+	        	{"sub_tit":"旅客须知","url":"b0.html"},
+	        	{"sub_tit":"机场服务","url":"b1.html"},
+	        	{"sub_tit":"机场设施","url":"d0.html"},
+	        	{"sub_tit":"贵宾服务","url":"b3.html"},
+	        	{"sub_tit":"常用电话","url":"b4.html"},
+	        	{"sub_tit":"交通指南","url":"b5.html"}
+	        ]
+	    },
+
+	    {
+	        "sub": [
+	        	{"sub_tit":"机场酒店","url":"c0.html"},
+	        	{"sub_tit":"餐饮购物","url":"c1.html"},
+	        	{"sub_tit":"汽车租赁","url":"c2.html"},
+	        	{"sub_tit":"空港食府","url":"c3.html"}
+	        ]
+	    },
+
+	    {
+	        "sub": [
+	        	{"sub_tit":"首页导航","url":"d0.html"}
+	        ]
+	    }
+    ]
+}
+
+init(data);
+
+</script>

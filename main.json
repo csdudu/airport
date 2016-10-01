@@ -1,0 +1,47 @@
+{
+    "nav_id": 3, 
+    "art_id": 0, 
+    "nav": [
+    	{"tit": "机场流程", "tit_en": "Process"},
+    	{"tit": "旅客服务", "tit_en": "Service"},
+    	{"tit": "机场商业", "tit_en": "Business"},
+    	{"tit": "首页", "tit_en": "home"}
+    ], 
+    "art": [
+	    {
+	        "sub": [
+	        	{"sub_tit":"国内出发","url":"a0.html"},
+	        	{"sub_tit":"国内到达","url":"a1.html"},
+	        	{"sub_tit":"国内中转","url":"a2.html"}
+	        ]
+	    },
+
+	    {
+	        "sub": [
+	        	{"sub_tit":"旅客须知","url":"b0.html"},
+	        	{"sub_tit":"机场服务","url":"b1.html"},
+	        	{"sub_tit":"机场设施","url":"d0.html"},
+	        	{"sub_tit":"贵宾服务","url":"b3.html"},
+	        	{"sub_tit":"常用电话","url":"b4.html"},
+	        	{"sub_tit":"交通指南","url":"b5.html"}
+	        ]
+	    },
+
+	    {
+	        "sub": [
+	        	
+	        	{"sub_tit":"餐饮购物","url":"c1.html"}
+	        	
+	        	
+	        ]
+	    },
+
+	    {
+	        "sub": [
+	        	{"sub_tit":"首页导航","url":"d0.html"}
+	        ]
+	    }
+    ]
+}
+
+

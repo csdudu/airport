@@ -1,0 +1,80 @@
+#imgPlay {
+	margin: 0px auto;
+	overflow: hidden;
+	width: 1920px;
+	zoom: 1;
+	position: relative;
+	height: 1080px;
+}
+#imgPlay .imgs img {
+	width: 1920px;
+}
+#imgPlay .imgs li {
+	float: left;
+	position: relative;
+}
+#imgPlay .imgs {
+	width: 5760px;
+}
+#imgPlay .prev {
+	background: url(player.png) no-repeat 0px 0px;
+	width: 46px;
+	cursor: pointer;
+	text-indent: -9999px;
+	position: absolute;
+	top: 270px;
+	height: 81px;
+}
+#imgPlay .next {
+	background: url(player.png) no-repeat 0px 0px;
+	width: 46px;
+	cursor: pointer;
+	text-indent: -9999px;
+	position: absolute;
+	top: 270px;
+	height: 81px;
+}
+#imgPlay .next {
+	background-position: right 0px;
+	right: 0px;
+	left: auto;
+}
+#imgPlay .num {
+	display: inline;
+	left: 520px;
+	position: absolute;
+	top: 275px;
+	height: 19px;
+}
+#imgPlay .num span {
+	display: inline-block;
+	background: url(player.png) no-repeat -19px -83px;
+	margin: 0px 2px;
+	overflow: hidden;
+	width: 14px;
+	cursor: pointer;
+	line-height: 0;
+	height: 13px;
+}
+#imgPlay .num span.on {
+	background-position: 1px -83px;
+}
+#imgPlay .num .mc {
+	padding-right: 0px;
+	padding-left: 0px;
+	float: left;
+	padding-bottom: 0px;
+	width: 13px;
+	padding-top: 3px;
+	height: 16px;
+}
+#imgPlay #numInner {
+	padding-right: 0px;
+	padding-left: 0px;
+	background: none transparent scroll repeat 0% 0%;
+	padding-bottom: 0px;
+	padding-top: 3px;
+	position: absolute;
+	top: 550px;
+	text-align: center;
+}

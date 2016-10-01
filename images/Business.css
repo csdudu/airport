@@ -1,0 +1,15 @@
+﻿@charset "utf-8";
+/* CSS Document */
+.scrollbar{
+	scrollbar-face-color: #ccc;
+	scrollbar-shadow-color: #fff;
+	scrollbar-highlight-color:#fff;
+	scrollbar-3dlight-color: #fff;  
+	scrollbar-darkshadow-color: #fff;
+	scrollbar-track-color:#fff;
+	scrollbar-arrow-color: #333;
+	font-size:12px;
+	line-height:20px;
+	letter-spacing:1px;
+	overflow-y:scroll;
+}
